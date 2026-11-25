@@ -1,0 +1,327 @@
+:root {
+  color-scheme: dark;
+  --ink: #f7f5ff;
+  --muted: #aaa9c3;
+  --surface: rgba(25, 27, 55, .88);
+  --line: rgba(172, 164, 255, .16);
+  --violet: #ad7aff;
+  --pink: #ff63c3;
+  --cyan: #66edff;
+  --green: #81f2b0;
+  font-family: "DM Sans", "Segoe UI", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse at 50% 4%, rgba(128, 69, 211, .2), transparent 34rem),
+    radial-gradient(ellipse at 5% 78%, rgba(17, 119, 160, .13), transparent 27rem),
+    #101225;
+}
+
+button, select { font: inherit; }
+button { color: inherit; }
+
+.casino-shell {
+  width: min(100% - 40px, 1040px);
+  margin: 0 auto;
+  padding: 27px 0 24px;
+}
+
+.topbar, .brand, .balance-card, .machine-topline, .controls, .paytable p, .paytable p span {
+  display: flex;
+  align-items: center;
+}
+
+.topbar { justify-content: space-between; }
+.brand {
+  gap: 7px;
+  color: var(--ink);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-decoration: none;
+}
+.brand > span:last-child { color: var(--cyan); }
+.brand-mark { color: var(--pink); font-size: 22px; }
+
+.balance-card {
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+}
+.balance-label, .eyebrow, .bet-control > span {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+.balance-card strong {
+  color: var(--green);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 22px;
+  font-variant-numeric: tabular-nums;
+}
+.balance-card small { color: #d3d0e7; font: 500 11px "DM Sans", sans-serif; }
+
+.hero { padding: 50px 0 29px; text-align: center; }
+.eyebrow { margin: 0 0 13px; color: var(--cyan); }
+h1, h2, p { margin-top: 0; }
+.hero h1 {
+  margin-bottom: 10px;
+  font: 700 clamp(32px, 6vw, 52px)/1.08 "Space Grotesk", sans-serif;
+  letter-spacing: -.055em;
+}
+.hero h1 span {
+  color: var(--pink);
+  text-shadow: 0 0 30px rgba(255, 99, 195, .3);
+}
+.intro { margin-bottom: 0; color: var(--muted); font-size: 14px; }
+
+.machine-card {
+  position: relative;
+  width: min(100%, 650px);
+  margin: 0 auto;
+  padding: 24px clamp(18px, 5vw, 45px) 25px;
+  overflow: hidden;
+  border: 1px solid rgba(183, 142, 255, .33);
+  border-radius: 22px;
+  background:
+    radial-gradient(ellipse at 50% 0, rgba(117, 65, 171, .26), transparent 60%),
+    linear-gradient(145deg, rgba(35, 29, 68, .97), rgba(20, 23, 48, .98));
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .34), 0 0 45px rgba(124, 72, 196, .12), inset 0 1px rgba(255, 255, 255, .06);
+}
+.machine-topline {
+  justify-content: center;
+  gap: 12px;
+  color: #e0b7ff;
+  font: 700 11px "Space Grotesk", sans-serif;
+  letter-spacing: .2em;
+}
+.demo-tag {
+  padding: 4px 8px;
+  border: 1px solid rgba(102, 237, 255, .32);
+  border-radius: 999px;
+  color: var(--cyan);
+  font-size: 9px;
+  letter-spacing: .1em;
+}
+
+.reels-frame {
+  position: relative;
+  margin: 22px auto 0;
+  padding: 13px;
+  border: 1px solid rgba(220, 207, 255, .17);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #0d1026, #17162f);
+  box-shadow: inset 0 5px 16px rgba(0, 0, 0, .38), 0 0 25px rgba(173, 122, 255, .1);
+}
+.reels {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.reel {
+  display: grid;
+  min-height: clamp(105px, 19vw, 145px);
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 10px;
+  background: linear-gradient(180deg, #f8f6ff, #dcd9f1);
+  color: #17172a;
+  font-size: clamp(42px, 9vw, 65px);
+  line-height: 1;
+  text-shadow: 0 2px 6px rgba(37, 34, 64, .12);
+  box-shadow: inset 0 0 16px rgba(72, 65, 108, .1);
+}
+.payline {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  right: 5px;
+  left: 5px;
+  height: 2px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255, 99, 195, .84), rgba(102, 237, 255, .84), transparent);
+  box-shadow: 0 0 10px rgba(255, 99, 195, .55);
+}
+.sparkle-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.reels-frame.is-spinning .reel { animation: reel-shake .16s linear infinite alternate; }
+.reels-frame.is-win { animation: win-glow .75s ease-in-out 2; }
+
+.game-message {
+  min-height: 25px;
+  margin: 17px 0;
+  color: #d9d4ed;
+  font-size: 13px;
+  text-align: center;
+}
+.game-message.is-win { color: var(--green); font-weight: 700; }
+.game-message.is-error { color: #ff98b7; }
+
+.controls { justify-content: center; gap: 13px; }
+.bet-control {
+  display: flex;
+  min-width: 155px;
+  flex-direction: column;
+  gap: 6px;
+}
+.bet-control select {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 36px 0 13px;
+  border: 1px solid rgba(196, 177, 255, .25);
+  border-radius: 10px;
+  outline: none;
+  background: #171932;
+  color: var(--ink);
+  cursor: pointer;
+}
+.spin-button, .bonus-button {
+  min-height: 49px;
+  padding: 0 25px;
+  border: 0;
+  border-radius: 10px;
+  background: linear-gradient(100deg, #ff62b9, #a877ff);
+  box-shadow: 0 8px 26px rgba(210, 91, 214, .24), inset 0 1px rgba(255, 255, 255, .3);
+  color: white;
+  cursor: pointer;
+  font: 800 13px "Space Grotesk", sans-serif;
+  letter-spacing: .08em;
+  transition: filter .18s ease, transform .18s ease, box-shadow .18s ease;
+}
+.spin-button { align-self: flex-end; min-width: 175px; }
+.spin-button span { margin-right: 7px; font-size: 18px; vertical-align: -1px; }
+.spin-button:hover:not(:disabled), .bonus-button:hover:not(:disabled) {
+  filter: brightness(1.12);
+  transform: translateY(-2px);
+  box-shadow: 0 11px 32px rgba(210, 91, 214, .36);
+}
+.spin-button:disabled, .bonus-button:disabled { cursor: wait; opacity: .62; }
+.reset-button {
+  display: block;
+  margin: 14px auto 0;
+  padding: 6px 10px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 11px;
+  text-decoration: underline;
+  text-decoration-color: rgba(170, 169, 195, .45);
+  text-underline-offset: 3px;
+}
+.reset-button:hover { color: var(--ink); }
+
+.info-grid {
+  display: grid;
+  width: min(100%, 800px);
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin: 20px auto 0;
+}
+.info-card {
+  padding: 19px 21px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(25, 27, 55, .58);
+}
+.info-card h2 {
+  margin-bottom: 11px;
+  color: #e9d8ff;
+  font: 700 14px "Space Grotesk", sans-serif;
+}
+.info-card p {
+  margin-bottom: 8px;
+  color: #bcbad0;
+  font-size: 11px;
+  line-height: 1.6;
+}
+.info-card p:last-child { margin-bottom: 0; }
+.info-card strong { color: #f3edff; }
+.scatter-text { color: #c9a0ff; white-space: nowrap; }
+.paytable p { justify-content: space-between; gap: 12px; }
+.paytable b { color: var(--cyan); }
+
+footer {
+  margin: 21px auto 0;
+  color: #82829c;
+  font-size: 10px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.bonus-overlay {
+  position: fixed;
+  z-index: 5;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(7, 8, 22, .82);
+  backdrop-filter: blur(9px);
+}
+.bonus-overlay[hidden] { display: none; }
+.bonus-panel {
+  width: min(100%, 430px);
+  padding: 32px 28px 28px;
+  border: 1px solid rgba(226, 153, 255, .42);
+  border-radius: 20px;
+  background:
+    radial-gradient(ellipse at 50% 0, rgba(163, 83, 219, .3), transparent 65%),
+    #191831;
+  box-shadow: 0 25px 100px rgba(0, 0, 0, .55), 0 0 55px rgba(219, 97, 255, .19);
+  text-align: center;
+}
+.bonus-stars { margin-bottom: 13px; color: #ffd781; font-size: 23px; }
+.bonus-kicker { margin-bottom: 8px; color: var(--cyan); font-size: 9px; font-weight: 800; letter-spacing: .19em; }
+.bonus-panel h2 { margin-bottom: 11px; font: 700 28px "Space Grotesk", sans-serif; letter-spacing: .03em; }
+.bonus-panel h2 span { color: var(--pink); }
+.bonus-copy { color: #c4c0d8; font-size: 13px; line-height: 1.6; }
+.bonus-meter { margin: 16px 0; color: #e5c4ff; font: 700 14px "Space Grotesk", sans-serif; }
+.bonus-result { min-height: 20px; margin-bottom: 12px; color: var(--green); font-size: 12px; }
+.bonus-button { width: 100%; }
+
+:focus-visible {
+  outline: 3px solid var(--cyan);
+  outline-offset: 4px;
+}
+
+@keyframes reel-shake {
+  from { transform: translateY(-3px); filter: blur(1px); }
+  to { transform: translateY(3px); filter: blur(2px); }
+}
+@keyframes win-glow {
+  50% { box-shadow: 0 0 30px rgba(129, 242, 176, .45), inset 0 0 20px rgba(129, 242, 176, .1); }
+}
+
+@media (max-width: 600px) {
+  .casino-shell { width: min(100% - 28px, 500px); padding-top: 18px; }
+  .hero { padding: 41px 0 24px; }
+  .intro { max-width: 300px; margin-right: auto; margin-left: auto; font-size: 12px; line-height: 1.6; }
+  .machine-card { padding: 20px 16px; border-radius: 17px; }
+  .reels-frame { padding: 9px; }
+  .reels { gap: 7px; }
+  .controls { align-items: stretch; gap: 9px; }
+  .bet-control { min-width: 0; flex: 1; }
+  .spin-button { min-width: 0; padding: 0 13px; flex: 1; }
+  .info-grid { grid-template-columns: 1fr; gap: 10px; }
+  .info-card { padding: 16px 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
