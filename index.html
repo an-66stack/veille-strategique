@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f2eb">
+  <meta name="description" content="Maquette locale d'une veille sur le recrutement chez Lidl France. Contenu de démonstration, non vérifié.">
+  <title>Veille recrutement · Lidl France</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f5f2eb;
+      --surface: #fffefa;
+      --ink: #20231f;
+      --muted: #73756d;
+      --line: #dedbd2;
+      --red: #c5222a;
+      --red-soft: #f8e9e7;
+      --green: #355b48;
+      --green-soft: #eaf0e9;
+      --gold: #a77c31;
+      --gold-soft: #f4eddd;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-family: var(--sans);
+      color: var(--ink);
+      background: var(--paper);
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; min-width: 320px; }
+    a { color: inherit; }
+    a:focus-visible, summary:focus-visible {
+      outline: 3px solid var(--red);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      z-index: 5;
+      padding: 10px 14px;
+      color: white;
+      background: var(--ink);
+      transform: translateY(-150%);
+    }
+    .skip-link:focus { transform: translateY(0); }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 22px 40px;
+      border-bottom: 1px solid var(--line);
+    }
+    .wordmark {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .wordmark-mark {
+      display: grid;
+      width: 30px;
+      height: 30px;
+      place-items: center;
+      border: 1px solid var(--red);
+      border-radius: 50%;
+      color: var(--red);
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+    .topbar-meta {
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    main {
+      width: min(1120px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 68px 0 84px;
+    }
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 18px;
+      color: var(--red);
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      width: 22px;
+      height: 1px;
+      background: currentColor;
+      content: "";
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 780px;
+      margin-bottom: 20px;
+      font-family: var(--serif);
+      font-size: clamp(42px, 7vw, 78px);
+      font-weight: 400;
+      letter-spacing: -.055em;
+      line-height: .99;
+    }
+    h1 span { color: var(--red); }
+    .intro {
+      max-width: 650px;
+      margin-bottom: 32px;
+      color: #55574f;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .demo-notice {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      max-width: 780px;
+      margin-bottom: 52px;
+      padding: 15px 18px;
+      border: 1px solid #e6d4ad;
+      border-radius: 7px;
+      background: var(--gold-soft);
+      color: #59451f;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .demo-notice strong {
+      display: block;
+      margin-bottom: 2px;
+      font-size: 12px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .notice-icon { flex: 0 0 auto; font-size: 17px; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 260px;
+      align-items: start;
+      gap: 68px;
+    }
+    .section-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 18px;
+    }
+    .section-heading h2 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 29px;
+      font-weight: 400;
+      letter-spacing: -.03em;
+    }
+    .section-heading span, .version-count {
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .note {
+      scroll-margin-top: 24px;
+      margin-bottom: 54px;
+      padding: 26px 28px 30px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: 0 8px 26px rgb(48 43 31 / 3%);
+    }
+    .note-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 21px;
+      border-bottom: 1px solid var(--line);
+    }
+    .note-date {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: 23px;
+    }
+    .note-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+    .note-intro {
+      max-width: 650px;
+      margin: 18px 0 21px;
+      color: #5f6059;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .story {
+      padding: 20px 0;
+      border-top: 1px solid var(--line);
+    }
+    .story-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 11px;
+    }
+    .kind {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 9px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 750;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .kind-official { color: var(--green); background: var(--green-soft); }
+    .kind-testimony { color: #765922; background: var(--gold-soft); }
+    .kind-watch { color: #8d292d; background: var(--red-soft); }
+    .story h3 {
+      margin-bottom: 7px;
+      font-family: var(--serif);
+      font-size: 21px;
+      font-weight: 400;
+      letter-spacing: -.02em;
+      line-height: 1.25;
+    }
+    .story p {
+      margin-bottom: 11px;
+      color: #62635d;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .story-foot {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 13px;
+    }
+    .source-link, .source-pending {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 650;
+    }
+    .source-link { color: var(--red); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    .source-link:hover { color: #8f151c; }
+    .source-pending { color: var(--muted); font-weight: 450; }
+    .score {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 4px;
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 750;
+    }
+    .score strong { color: var(--red); font-family: var(--serif); font-size: 19px; font-weight: 400; }
+    .score span { color: var(--muted); font-weight: 450; }
+    .score-reason {
+      width: 100%;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .watchlist {
+      margin-top: 4px;
+      padding: 22px 23px;
+      border-radius: 7px;
+      background: #222722;
+      color: #f9f6ed;
+    }
+    .watchlist h2 {
+      margin: 0 0 17px;
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 400;
+    }
+    .watchlist ol { margin: 0; padding: 0; list-style: none; counter-reset: watch; }
+    .watchlist li {
+      position: relative;
+      padding: 13px 0 13px 34px;
+      border-top: 1px solid rgb(255 255 255 / 15%);
+      color: #e7e5dc;
+      font-size: 12px;
+      line-height: 1.55;
+      counter-increment: watch;
+    }
+    .watchlist li::before {
+      position: absolute;
+      left: 0;
+      color: #e59b82;
+      font-family: var(--serif);
+      font-size: 16px;
+      content: "0" counter(watch);
+    }
+    .watchlist small {
+      display: block;
+      margin-top: 5px;
+      color: #aeb2aa;
+      font-size: 10px;
+    }
+
+    .method {
+      margin-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+    .method summary {
+      padding: 16px 0;
+      color: #4b4d46;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      list-style-position: inside;
+    }
+    .method p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .archive {
+      position: sticky;
+      top: 24px;
+      padding-top: 4px;
+    }
+    .archive-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--ink);
+    }
+    .archive-head h2 {
+      margin: 0;
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .archive-list { margin: 0; padding: 0; list-style: none; }
+    .archive-list li { border-bottom: 1px solid var(--line); }
+    .archive-list a {
+      display: block;
+      padding: 17px 2px;
+      text-decoration: none;
+    }
+    .archive-list a:hover .archive-date { color: var(--red); }
+    .archive-date {
+      display: block;
+      margin-bottom: 5px;
+      font-family: var(--serif);
+      font-size: 18px;
+      transition: color .15s ease;
+    }
+    .archive-detail {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+    .archive-tag {
+      padding: 4px 6px;
+      border-radius: 2px;
+      background: #e9e5db;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .archive-note {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+    footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 40px 30px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: .04em;
+    }
+    footer a { text-underline-offset: 3px; }
+
+    @media (max-width: 800px) {
+      .topbar { padding: 18px 24px; }
+      main { width: min(680px, calc(100% - 40px)); padding-top: 52px; }
+      .layout { grid-template-columns: 1fr; gap: 12px; }
+      .archive { position: static; grid-row: 1; margin-bottom: 28px; }
+      .archive-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; }
+      .watchlist { margin-top: 0; }
+      footer { padding-right: 24px; padding-left: 24px; }
+    }
+    @media (max-width: 480px) {
+      .topbar { padding: 15px 20px; }
+      .topbar-meta { font-size: 9px; }
+      main { width: calc(100% - 32px); padding-top: 42px; }
+      .intro { font-size: 14px; }
+      .demo-notice { margin-bottom: 36px; padding: 13px; font-size: 12px; }
+      .archive-list { grid-template-columns: 1fr; }
+      .note { padding: 20px 17px 22px; }
+      .note-date { font-size: 20px; }
+      .section-heading { align-items: flex-start; flex-direction: column; gap: 5px; }
+      .story h3 { font-size: 19px; }
+      footer { padding-right: 16px; padding-left: 16px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+  <header class="topbar">
+    <div class="wordmark"><span class="wordmark-mark" aria-hidden="true">V</span> Le point de vigie</div>
+    <div class="topbar-meta">Recrutement · France</div>
+  </header>
+
+  <main id="contenu">
+    <p class="eyebrow">Carnet de veille · RH &amp; emploi</p>
+    <h1>Le recrutement<br>chez <span>Lidl France</span></h1>
+    <p class="intro">Une lecture rapide des signaux publics liés à l’emploi : annonces de l’entreprise, retours de terrain et éléments à confirmer. Chaque édition garde son propre lien pour retrouver facilement l’état de la veille à une date donnée.</p>
+
+    <aside class="demo-notice" aria-label="Avertissement sur le contenu de démonstration">
+      <span class="notice-icon" aria-hidden="true">✳</span>
+      <div><strong>Maquette — données fictives</strong>Cette page illustre le format et la navigation. Les entrées, dates et notes ci-dessous ne décrivent pas des actualités vérifiées. Le lien officiel mène au portail carrières, pas à une offre précise.</div>
+    </aside>
+
+    <div class="layout">
+      <section aria-labelledby="latest-title">
+        <div class="section-heading">
+          <h2 id="latest-title">Dernière édition</h2>
+          <span>Lecture · 3 min</span>
+        </div>
+
+        <article class="note" id="version-2026-11-25" aria-labelledby="date-2026-11-25">
+          <header class="note-header">
+            <h3 class="note-date" id="date-2026-11-25">Mercredi 25 novembre 2026</h3>
+            <div class="note-meta"><span class="status-dot" aria-hidden="true"></span>Édition de démonstration · v1</div>
+          </header>
+          <p class="note-intro">Exemple de synthèse : les rubriques ci-dessous montrent comment distinguer les niveaux de preuve avant de résumer une information. Aucun poste ni témoignage réel n’est rapporté dans cette maquette.</p>
+
+          <section class="story" aria-labelledby="item-official">
+            <div class="story-top">
+              <span class="kind kind-official">Annonce officielle · modèle</span>
+              <span class="score"><strong>8</strong>/10 <span>exemple</span></span>
+            </div>
+            <h3 id="item-official">Offres à relever sur le portail carrières</h3>
+            <p><strong>Résumé type.</strong> Pour chaque annonce repérée, consigner l’intitulé exact, le lieu, le type de contrat et la date de publication. Cette carte est un gabarit : elle ne confirme pas l’existence d’une offre particulière.</p>
+            <div class="story-foot">
+              <a class="source-link" href="https://carriere.lidl.fr/" target="_blank" rel="noopener noreferrer">Ouvrir le site carrières Lidl France <span aria-hidden="true">↗</span></a>
+              <span class="score-reason">Note fictive : source primaire adaptée au sujet ; une offre et sa date resteraient à vérifier.</span>
+            </div>
+          </section>
+
+          <section class="story" aria-labelledby="item-testimony">
+            <div class="story-top">
+              <span class="kind kind-testimony">Témoignage · à qualifier</span>
+              <span class="score"><strong>4</strong>/10 <span>exemple</span></span>
+            </div>
+            <h3 id="item-testimony">Retour d’expérience candidat ou salarié</h3>
+            <p><strong>Résumé type.</strong> Reprendre le contexte et la date du témoignage, sans le généraliser à l’ensemble des équipes. Vérifier qu’il s’agit d’un récit personnel et non d’une communication officielle.</p>
+            <div class="story-foot">
+              <span class="source-pending">Lien direct à ajouter lors d’une vraie collecte</span>
+              <span class="score-reason">Note fictive : témoignage isolé, identité et représentativité à examiner.</span>
+            </div>
+          </section>
+
+          <section class="story" aria-labelledby="item-uncertain">
+            <div class="story-top">
+              <span class="kind kind-watch">Signal · incertain</span>
+              <span class="score"><strong>2</strong>/10 <span>exemple</span></span>
+            </div>
+            <h3 id="item-uncertain">Information à corroborer avant publication</h3>
+            <p><strong>Résumé type.</strong> Si une information n’est accessible que via un extrait, une republication ou une source secondaire, la signaler comme non confirmée et rechercher une source directe.</p>
+            <div class="story-foot">
+              <span class="source-pending">Source non renseignée — aucune affirmation factuelle</span>
+              <span class="score-reason">Note fictive : source primaire absente et corroboration non établie.</span>
+            </div>
+          </section>
+
+          <details class="method">
+            <summary>Comment lire la note de fiabilité ?</summary>
+            <p>La note est indicative, sur 10 : origine et traçabilité de la source (0–4), fraîcheur de l’information (0–3), corroboration indépendante (0–3). Elle qualifie une information, pas la crédibilité d’une personne. Dans cette maquette, les scores sont fictifs.</p>
+          </details>
+        </article>
+
+        <div class="section-heading">
+          <h2>Édition précédente</h2>
+          <span>Archive</span>
+        </div>
+        <article class="note" id="version-2026-11-18" aria-labelledby="date-2026-11-18">
+          <header class="note-header">
+            <h3 class="note-date" id="date-2026-11-18">Mercredi 18 novembre 2026</h3>
+            <div class="note-meta"><span class="status-dot" aria-hidden="true"></span>Édition de démonstration · v0</div>
+          </header>
+          <p class="note-intro">Version antérieure conservée pour illustrer l’archive. La date et le contenu sont fictifs ; cette édition ne doit pas être interprétée comme un relevé de veille réel.</p>
+          <section class="story" aria-labelledby="item-archive">
+            <div class="story-top">
+              <span class="kind kind-official">Structure de la note</span>
+              <span class="score"><strong>—</strong><span>aucune donnée</span></span>
+            </div>
+            <h3 id="item-archive">Sources, résumé et niveau de preuve</h3>
+            <p>Chaque version publiée peut être conservée ici avec ses liens directs, sa date de consultation et les incertitudes observées à ce moment-là. Aucun résultat réel n’est fourni dans cet exemple.</p>
+            <div class="story-foot">
+              <span class="source-pending">Aucune source citée dans cette maquette</span>
+            </div>
+          </section>
+          <details class="method">
+            <summary>Critères de fiabilité</summary>
+            <p>Origine de la source, fraîcheur et corroboration indépendante. Une source inaccessible doit être explicitement signalée plutôt que résumée sans vérification.</p>
+          </details>
+        </article>
+      </section>
+
+      <aside class="archive" aria-labelledby="archive-title">
+        <div class="archive-head">
+          <h2 id="archive-title">Toutes les versions</h2>
+          <span class="version-count">02</span>
+        </div>
+        <nav aria-label="Versions des notes de veille">
+          <ul class="archive-list">
+            <li>
+              <a href="#version-2026-11-25">
+                <span class="archive-date">25 nov. 2026</span>
+                <span class="archive-detail"><span>Recrutement · France</span><span class="archive-tag">v1 · maquette</span></span>
+              </a>
+            </li>
+            <li>
+              <a href="#version-2026-11-18">
+                <span class="archive-date">18 nov. 2026</span>
+                <span class="archive-detail"><span>Recrutement · France</span><span class="archive-tag">v0 · maquette</span></span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <p class="archive-note">Chaque date possède une ancre directe : copiez l’adresse après avoir sélectionné une édition pour la partager ou la retrouver.</p>
+
+        <section class="watchlist" aria-labelledby="watchlist-title">
+          <h2 id="watchlist-title">À surveiller</h2>
+          <ol>
+            <li>Les nouvelles offres et leurs dates de publication.<small>Source à privilégier : portail carrières officiel.</small></li>
+            <li>Les évolutions de métiers, lieux et types de contrat.<small>Comparer les annonces sans déduire une tendance d’un cas isolé.</small></li>
+            <li>Les retours candidats ou salariés accessibles publiquement.<small>Distinguer témoignage, avis agrégé et communication de l’entreprise.</small></li>
+          </ol>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <span>Veille recrutement · Lidl France</span>
+    <span>Prototype local · contenu de démonstration non vérifié</span>
+    <a href="#contenu">Retour en haut ↑</a>
+  </footer>
+</body>
+</html>
